@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "Project2 JWT Auth API",
+    "_postman_id": "58ef7612-2c52-4ea8-ab87-5ac4142ec001",
+    "description": "Postman collection for user registration, login, and protected profile route using Bearer token authentication.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"john_doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/register",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        },
+        "description": "Registers a new user.\n\nSample success response:\n{\n  \"message\": \"User registered successfully\",\n  \"user\": {\n    \"id\": \"65f2f63ab11d6c0012345678\",\n    \"username\": \"john_doe\",\n    \"email\": \"john@example.com\"\n  }\n}\n\nSample error response:\n{\n  \"message\": \"User already exists with this email\"\n}"
+      },
+      "response": []
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        },
+        "description": "Logs in a registered user and returns a JWT.\n\nSample success response:\n{\n  \"message\": \"Login successful\",\n  \"token\": \"your_jwt_token\"\n}\n\nSample error response:\n{\n  \"message\": \"Invalid email or password\"\n}"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Current User",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/me",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "me"
+          ]
+        },
+        "description": "Returns the current user's decoded token information.\n\nSample success response:\n{\n  \"message\": \"User fetched successfully\",\n  \"user\": {\n    \"userId\": \"65f2f63ab11d6c0012345678\",\n    \"username\": \"john_doe\",\n    \"email\": \"john@example.com\"\n  }\n}\n\nSample error response:\n{\n  \"message\": \"Invalid or expired token\"\n}"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
