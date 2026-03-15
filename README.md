@@ -141,8 +141,24 @@ Deploy the server on Render:
 
 1. Push this project to GitHub.
 2. Create a new Web Service in Render.
-3. Add the environment variables from your `.env`.
-4. Use the start command:
+3. Connect the GitHub repository.
+4. Render should detect the project automatically. Use:
+
+```bash
+Build Command: npm install
+Start Command: npm start
+```
+
+5. Add these environment variables in Render:
+
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
+
+6. `PORT` is not required on Render because Render provides it automatically.
+7. If you use MongoDB Compass locally, switch `MONGO_URI` in Render to MongoDB Atlas or another hosted MongoDB database.
+8. Use the start command:
 
 ```bash
 npm start
